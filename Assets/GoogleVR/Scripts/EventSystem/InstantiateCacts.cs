@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class InstantiateCacts : MonoBehaviour {
+using UnityEngine.Networking;
+public class InstantiateCacts : NetworkBehaviour {
 	public GameObject player;
 	public Transform cactusPrefab;
 	private float lastPosition;
@@ -10,15 +10,19 @@ public class InstantiateCacts : MonoBehaviour {
 
 	void Start () {
 		//InvokeRepeating("SpawnCactus", 1f, 3f);
-		lastPosition = player.transform.position[2];
+		if (isLocalPlayer) {
+			lastPosition = player.transform.position [2];
+		}
 	}
 
 	// Update is called once per frame
 	void Update () {
-		float newPosition = player.transform.position [2];
-		if (newPosition > lastPosition + 5) {
-			SpawnCactus (newPosition);
-			lastPosition = newPosition;
+		if (isLocalPlayer) {
+			float newPosition = player.transform.position [2];
+			if (newPosition > lastPosition + 5) {
+				SpawnCactus (newPosition);
+				lastPosition = newPosition;
+			}
 		}
 	}
 	private int counter;

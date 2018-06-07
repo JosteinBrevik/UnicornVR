@@ -83,10 +83,7 @@ public static class GvrAudio {
       listenerTransform = listener.transform;
 
       initialized = true;
-    } else if (listener.transform != listenerTransform) {
-      Debug.LogError("Only one GvrAudioListener component is allowed in the scene.");
-      GvrAudioListener.Destroy(listener);
-    }
+    } 
   }
 
   /// Shuts down the audio system.

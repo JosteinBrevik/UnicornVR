@@ -17,6 +17,7 @@ using System;
 using System.Collections.Generic;
 
 using Gvr.Internal;
+using UnityEngine.Networking;
 
 /// The GvrViewer object communicates with the head-mounted display.
 /// Is is repsonsible for:
@@ -28,7 +29,7 @@ using Gvr.Internal;
 /// by this script at runtime, or you can add one via the Editor if you wish to customize
 /// its starting properties.
 [AddComponentMenu("GoogleVR/GvrViewer")]
-public class GvrViewer : MonoBehaviour {
+public class GvrViewer : NetworkBehaviour {
   public const string GVR_SDK_VERSION = "1.30";
 
   /// The singleton instance of the GvrViewer class.
@@ -93,7 +94,7 @@ public class GvrViewer : MonoBehaviour {
 #if !UNITY_HAS_GOOGLEVR || UNITY_EDITOR
       return vrModeEnabled;
 #else
-      return UnityEngine.VR.VRSettings.enabled;
+      return UnityEngine.XR.XRSettings.enabled;
 #endif  // !UNITY_HAS_GOOGLEVR || UNITY_EDITOR
     }
     set {
@@ -398,14 +399,14 @@ public class GvrViewer : MonoBehaviour {
   /// code to hiccup.  Exception: developer may call Application.DontDestroyOnLoad
   /// on the SDK if they want it to survive across scene loads.
   void Awake() {
-    if (instance == null) {
-      instance = this;
-    }
+    instance = this;
+		/*
     if (instance != this) {
       Debug.LogError("There must be only one GvrViewer object in a scene.");
       UnityEngine.Object.DestroyImmediate(this);
-      return;
+      return; 
     }
+    */
 #if UNITY_IOS
     Application.targetFrameRate = 60;
 #endif

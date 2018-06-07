@@ -271,9 +271,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ceb26fd7edcf6341aac29742e22dcaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  renderQuad: {fileID: 1787575076}
-  darknessResoution: 100
   scoreText: {fileID: 1897520498}
+  renderQuad: {fileID: 1787575076}
+  darknessResoution: 1000
+  updateTimeMillis: 500
 --- !u!4 &810651462
 Transform:
   m_ObjectHideFlags: 0
