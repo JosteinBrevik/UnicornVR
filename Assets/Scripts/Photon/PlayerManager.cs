@@ -14,7 +14,7 @@ namespace Com.DefaultCompany.UnicornVR
         void Start()
         {
             CameraWork _cameraWork = this.gameObject.GetComponent<CameraWork>();
-
+            GvrViewer.Create();
 
             if (_cameraWork != null)
             {

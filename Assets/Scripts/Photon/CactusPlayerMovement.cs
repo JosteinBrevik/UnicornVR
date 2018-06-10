@@ -6,10 +6,11 @@ public class CactusPlayerMovement : Photon.PunBehaviour
     {
         if (photonView.isMine)
         {
-            var x = Input.GetAxis("HorizontalUI") * Time.deltaTime * 150.0f;
-            var z = Input.GetAxis("VerticalUI") * Time.deltaTime * 3.0f;
-            transform.Rotate(0, x, 0);
-            transform.Translate(0, 0, z);
+            var x = Input.GetAxis("HorizontalUI") * Time.deltaTime * 12.0f;
+            var z = GvrViewer.Instance.HeadPose.Orientation * Vector3.up;
+
+            //transform.Rotate(0, x, 0);
+            transform.Translate(0, 0, z[2]);
         }
 
 

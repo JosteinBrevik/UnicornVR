@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/CameraDetection.unity
     guid: 3ab5b34635f843f488a73cce1efac2af
   - enabled: 0
@@ -14,13 +14,13 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Main.unity
     guid: cc21cf176e22c3d4a90ccaf381f79a27
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Launcher.unity
     guid: 8a2fa82a40972ff4aa378496d76e49f8
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Room for 1.unity
     guid: 60c4687eb08d25144b059090a7900be6
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Room for 2.unity
     guid: 578007eaab25c2745a1a9dd049679abd
   m_configObjects: {}

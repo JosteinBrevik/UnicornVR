@@ -281,7 +281,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreText: {fileID: 1897520498}
   renderQuad: {fileID: 1787575076}
-  darknessResoution: 1000
+  divideResolutionBy: 4
   updateTimeMillis: 500
 --- !u!4 &810651462
 Transform:
