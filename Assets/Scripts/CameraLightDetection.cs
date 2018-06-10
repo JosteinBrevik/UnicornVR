@@ -60,11 +60,11 @@ public class CameraLightDetection : MonoBehaviour
         Debug.Log((pixels.Length / divideResolutionBy).ToString());
 
         int sum = 0;
-		for (int i = 0; i < (int)pixels.Length / divideResolutionBy; i += divideResolutionBy)
+		for (int i = 0; i < (int)pixels.Length; i += divideResolutionBy)
         {
             sum += (pixels[i].r + pixels[i].b + pixels[i].g) / 3; //Don't want alpha channel
         }
-        Debug.Log(sum + ((int)pixels.Length / divideResolutionBy).ToString());
+		Debug.Log(sum + " " + ((int)pixels.Length / divideResolutionBy).ToString() + " " + mainCam.transform.rotation[0]);
         //Score is average greyscale value, 0 to 255
         scoreText.text = (sum / (pixels.Length / divideResolutionBy)).ToString() + " " + (mainCam.transform.rotation).ToString();
     }
