@@ -17,6 +17,9 @@ namespace Com.DefaultCompany.UnicornVR
         [Tooltip("The UI Label to inform the user that the connection is in progress")]
         public GameObject progressLabel;
 
+        [Tooltip("The UI Label to inform the user that the connection is in progress")]
+        public string SCENE_TO_USE = "straightPathsLevel";
+
         #endregion
 
 
@@ -137,12 +140,12 @@ namespace Com.DefaultCompany.UnicornVR
             // #Critical: We only load if we are the first player, else we rely on  PhotonNetwork.automaticallySyncScene to sync our instance scene.
             if (PhotonNetwork.room.PlayerCount == 1)
             {
-                Debug.Log("We load the 'WaitingRoom' ");
+                Debug.Log("We load the" + SCENE_TO_USE);
 
 
                 // #Critical
                 // Load the Room Level. 
-                PhotonNetwork.LoadLevel("WaitingRoom");
+                PhotonNetwork.LoadLevel(SCENE_TO_USE);
             }
         }
 
