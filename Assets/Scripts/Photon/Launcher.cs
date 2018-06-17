@@ -137,7 +137,7 @@ namespace Com.DefaultCompany.UnicornVR
             // #Critical: We only load if we are the first player, else we rely on  PhotonNetwork.automaticallySyncScene to sync our instance scene.
             if (PhotonNetwork.room.PlayerCount == 1)
             {
-                Debug.Log("We load the 'straightPathsLevel' ");
+                Debug.Log("We load the 'WaitingRoom' ");
 
 
                 // #Critical

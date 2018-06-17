@@ -14,7 +14,7 @@ public class WaitingRoomManager : Photon.PunBehaviour {
 	void Update () {
 		if (playerCountText) {
 			TextMesh t = (TextMesh)playerCountText.GetComponent (typeof(TextMesh));
-			t.text = PhotonNetwork.room.playerCount.ToString() + " " + PhotonNetwork.countOfRooms;
+			t.text = PhotonNetwork.room.playerCount + " " + PhotonNetwork.countOfRooms;
 		}
 		 
 	}
