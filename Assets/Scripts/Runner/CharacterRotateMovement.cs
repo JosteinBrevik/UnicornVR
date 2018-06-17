@@ -21,7 +21,7 @@ public class CharacterRotateMovement : Photon.PunBehaviour
 
     bool isInSwipeArea;
 
-    private GameState GameState = GameState.Start;
+    private GameState GameState;// = GameState.Start;
     public SpeedController MySpeedController;
 
     // Use this for initialization
@@ -37,11 +37,16 @@ public class CharacterRotateMovement : Photon.PunBehaviour
             UIManager.Instance.ResetScore();
             UIManager.Instance.SetStatus(Constants.StatusTapToStart);
 
-            GameState = GameState.Start;
+            GameState = GameState.Playing;
 
             anim = CharacterGO.GetComponent<Animator>();
             controller = GetComponent<CharacterController>();
 
+            anim.SetBool(Constants.AnimationStarted, true);
+            var instance = GameManager.Instance;
+            instance.GameState = GameState.Playing;
+
+            UIManager.Instance.SetStatus(string.Empty);
 
         }
     }
@@ -54,7 +59,7 @@ public class CharacterRotateMovement : Photon.PunBehaviour
             switch (GameState)
             {
                 case GameState.Start:
-                    if (Input.GetMouseButtonUp(0))
+                    if (true)//Input.GetMouseButtonUp(0))
                     {
                         anim.SetBool(Constants.AnimationStarted, true);
                         var instance = GameManager.Instance;

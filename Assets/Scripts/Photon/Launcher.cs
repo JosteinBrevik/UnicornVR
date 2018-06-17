@@ -10,14 +10,14 @@ namespace Com.DefaultCompany.UnicornVR
         /// The maximum number of players per room. When a room is full, it can't be joined by new players, and so new room will be created.
         /// </summary>   
         [Tooltip("The maximum number of players per room. When a room is full, it can't be joined by new players, and so new room will be created")]
-        public byte MaxPlayersPerRoom = 2;
+        public byte MaxPlayersPerRoom = 4;
 
 		public PhotonLogLevel Loglevel = PhotonLogLevel.Informational;
 
         [Tooltip("The UI Label to inform the user that the connection is in progress")]
         public GameObject progressLabel;
 
-        [Tooltip("The UI Label to inform the user that the connection is in progress")]
+        [Tooltip("The Scene to load")]
         public string SCENE_TO_USE = "straightPathsLevel";
 
         #endregion

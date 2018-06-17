@@ -34,7 +34,7 @@ namespace Com.DefaultCompany.UnicornVR
                 if (PlayerManager.LocalPlayerInstance == null)
                 {
                     Debug.Log("We are Instantiating LocalPlayer from " + Application.loadedLevelName);
-                    position = new Vector3(UnityEngine.Random.Range(minX, maxX), 20, 1);
+                    position = new Vector3(UnityEngine.Random.Range(minX, maxX), 2, 1);
                     // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
                     PhotonNetwork.Instantiate(this.playerPrefab.name, position, Quaternion.identity, 0);
                 }
