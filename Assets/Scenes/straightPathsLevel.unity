@@ -306,7 +306,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minX: -2
   maxX: 2
-  playerPrefab: {fileID: 1955544139341460, guid: c7354ec2050b9af48bf80a8cd13738ed,
+  playerPrefab: {fileID: 1567448581160626, guid: 4976a6b01e0f8c245b72d7eb3083712d,
     type: 2}
 --- !u!1 &737401838
 GameObject:

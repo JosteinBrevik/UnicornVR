@@ -27,7 +27,7 @@ public class CharacterRotateMovement : Photon.PunBehaviour
     // Use this for initialization
     void Start()
     {
-        if (true)
+        if (photonView.isMine)
         {
             VRCamera = Camera.main.transform;
             moveDirection = transform.forward;
@@ -37,19 +37,21 @@ public class CharacterRotateMovement : Photon.PunBehaviour
             UIManager.Instance.ResetScore();
             UIManager.Instance.SetStatus(Constants.StatusTapToStart);
 
-            GameManager.Instance.GameState = GameState.Start;
+            GameState = GameState.Start;
 
             anim = CharacterGO.GetComponent<Animator>();
             controller = GetComponent<CharacterController>();
+
+
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (true)
+        if (photonView.isMine)
         {
-            switch (GameManager.Instance.GameState)
+            switch (GameState)
             {
                 case GameState.Start:
                     if (Input.GetMouseButtonUp(0))
