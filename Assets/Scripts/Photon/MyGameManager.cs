@@ -12,7 +12,7 @@ namespace Com.DefaultCompany.UnicornVR
     {
 
         static public MyGameManager Instance;
-        static public string ROOM_SCENCE_NAME = "Room for 1";
+        static public string ROOM_SCENCE_NAME = "straightPathsLevel";
 
         [Tooltip("The prefab to use for representing the player")]
         public GameObject playerPrefab;
