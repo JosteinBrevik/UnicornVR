@@ -10,12 +10,10 @@ namespace Com.DefaultCompany.UnicornVR
         /// The maximum number of players per room. When a room is full, it can't be joined by new players, and so new room will be created.
         /// </summary>   
         [Tooltip("The maximum number of players per room. When a room is full, it can't be joined by new players, and so new room will be created")]
-        public byte MaxPlayersPerRoom = 4;
+        public byte MaxPlayersPerRoom = 2;
 
-        public PhotonLogLevel Loglevel = PhotonLogLevel.Informational;
+		public PhotonLogLevel Loglevel = PhotonLogLevel.Informational;
 
-        [Tooltip("The Ui Panel to let the user enter name, connect and play")]
-        public GameObject controlPanel;
         [Tooltip("The UI Label to inform the user that the connection is in progress")]
         public GameObject progressLabel;
 
@@ -66,7 +64,6 @@ namespace Com.DefaultCompany.UnicornVR
         void Start()
         {
             progressLabel.SetActive(false);
-            controlPanel.SetActive(true);
             Connect();
         }
 
@@ -88,7 +85,6 @@ namespace Com.DefaultCompany.UnicornVR
             isConnecting = true;
 
             progressLabel.SetActive(true);
-            controlPanel.SetActive(false);
             // we check if we are connected or not, we join if we are , else we initiate the connection to the server.
             if (PhotonNetwork.connected)
             {
@@ -124,7 +120,6 @@ namespace Com.DefaultCompany.UnicornVR
         public override void OnDisconnectedFromPhoton()
         {
             progressLabel.SetActive(false);
-            controlPanel.SetActive(true);
             Debug.LogWarning("DemoAnimator/Launcher: OnDisconnectedFromPhoton() was called by PUN");
         }
 
@@ -142,12 +137,12 @@ namespace Com.DefaultCompany.UnicornVR
             // #Critical: We only load if we are the first player, else we rely on  PhotonNetwork.automaticallySyncScene to sync our instance scene.
             if (PhotonNetwork.room.PlayerCount == 1)
             {
-                Debug.Log("We load the 'straightPathsLevel' ");
+                Debug.Log("We load the 'WaitingRoom' ");
 
 
                 // #Critical
                 // Load the Room Level. 
-                PhotonNetwork.LoadLevel("straightPathsLevel");
+                PhotonNetwork.LoadLevel("WaitingRoom");
             }
         }
 
