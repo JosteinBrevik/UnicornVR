@@ -13,6 +13,10 @@ namespace Com.DefaultCompany.UnicornVR
 
         static public MyGameManager Instance;
         static public string ROOM_SCENCE_NAME = "straightPathsLevel";
+        public float minX = -2f, maxX = 2f;
+        private Vector3 position;
+        public GameState GameState { get; set; }
+
 
         [Tooltip("The prefab to use for representing the player")]
         public GameObject playerPrefab;
@@ -30,8 +34,9 @@ namespace Com.DefaultCompany.UnicornVR
                 if (PlayerManager.LocalPlayerInstance == null)
                 {
                     Debug.Log("We are Instantiating LocalPlayer from " + Application.loadedLevelName);
+                    position = new Vector3(UnityEngine.Random.Range(minX, maxX), 20, 1);
                     // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
-                    PhotonNetwork.Instantiate(this.playerPrefab.name, new Vector3(0f, 5f, 0f), Quaternion.identity, 0);
+                    PhotonNetwork.Instantiate(this.playerPrefab.name, position, Quaternion.identity, 0);
                 }
                 else
                 {
@@ -113,7 +118,6 @@ namespace Com.DefaultCompany.UnicornVR
                 //LoadArena();
             }
         }
-
 
         #endregion
     }

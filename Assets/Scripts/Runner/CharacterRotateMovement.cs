@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
 public class CharacterRotateMovement : Photon.PunBehaviour
 {
     //character model found in https://www.assetstore.unity3d.com/en/#!/content/3012
@@ -22,7 +21,7 @@ public class CharacterRotateMovement : Photon.PunBehaviour
 
     bool isInSwipeArea;
 
-
+    private GameState GameState = GameState.Start;
     public SpeedController MySpeedController;
 
     // Use this for initialization
@@ -147,4 +146,18 @@ public class CharacterRotateMovement : Photon.PunBehaviour
 
     }
 
+    public void Die()
+    {
+        UIManager.Instance.SetStatus(Constants.StatusDeadTapToStart);
+        this.GameState = GameState.Dead;
+    }
+    public void Slow()
+    {
+        this.GameState = GameState.Slow;
+    }
+
+    public void SpeedUp()
+    {
+        this.GameState = GameState.SpeedUp;
+    }
 }
