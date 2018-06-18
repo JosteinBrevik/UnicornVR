@@ -119,6 +119,11 @@ namespace Com.DefaultCompany.UnicornVR
             }
         }
 
+        public void Slow()
+        {
+
+        }
+
         #endregion
     }
 }
