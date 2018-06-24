@@ -7,8 +7,6 @@ namespace Com.DefaultCompany.UnicornVR
 
     public class PlayerManager : Photon.PunBehaviour
     {
-        public float Health = 1f;
-        private Transform VRCamera;
 
         [Tooltip("The local player instance. Use this to know if the local player is represented in the Scene")]
         public static GameObject LocalPlayerInstance;
@@ -16,7 +14,6 @@ namespace Com.DefaultCompany.UnicornVR
         void Start()
         {
             CameraWork _cameraWork = this.gameObject.GetComponent<CameraWork>();
-            VRCamera = Camera.main.transform;
 
             if (_cameraWork != null)
             {
@@ -31,15 +28,19 @@ namespace Com.DefaultCompany.UnicornVR
             }
         }
 
+        /*
         // Update is called once per frame
         void Update()
         {
-            if (transform.position.y < 0)
+            if (transform.position.y < -5)
             {
                 MyGameManager.Instance.LeaveRoom();
 
             }
         }
+        */
+
+
 
         void Awake()
         {
@@ -77,7 +78,6 @@ namespace Com.DefaultCompany.UnicornVR
             }
 
 
-            Health -= 0.1f;
         }
 
 
@@ -99,14 +99,13 @@ namespace Com.DefaultCompany.UnicornVR
 
             // We are only interested in Beamers
             // we should be using tags but for the sake of distribution, let's simply check by name.
-            if (!other.name.Contains("Beam"))
+            if (other.name.Contains("Obstacle"))
             {
                 return;
             }
 
 
             // we slowly affect health when beam is constantly hitting us, so player has to move to prevent death.
-            Health -= 0.1f * Time.deltaTime;
         }
     }
 }

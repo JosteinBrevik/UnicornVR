@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-
+    /*
     void Awake()
     {
         if (instance == null)
@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
     {
         this.GameState = GameState.SpeedUp;
     }
-
+    */
 }
 
 

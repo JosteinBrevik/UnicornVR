@@ -361,7 +361,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da29726881639e848ac8f2a73dfe9a0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxPlayersPerRoom: 4
+  MaxPlayersPerRoom: 2
   Loglevel: 1
   progressLabel: {fileID: 1555509227}
   SCENE_TO_USE: straightPathsLevel

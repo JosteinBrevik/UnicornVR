@@ -10,12 +10,6 @@ public class Candy : MonoBehaviour
         transform.Rotate(Vector3.up, Time.deltaTime * rotateSpeed);
     }
 
-    void OnTriggerEnter(Collider col)
-    {
-        UIManager.Instance.IncreaseScore(ScorePoints);
-        Destroy(this.gameObject);
-    }
-
     public int ScorePoints = 100;
     public float rotateSpeed = 50f;
 }

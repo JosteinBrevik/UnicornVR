@@ -10,7 +10,7 @@ namespace Com.DefaultCompany.UnicornVR
         /// The maximum number of players per room. When a room is full, it can't be joined by new players, and so new room will be created.
         /// </summary>   
         [Tooltip("The maximum number of players per room. When a room is full, it can't be joined by new players, and so new room will be created")]
-        public byte MaxPlayersPerRoom = 4;
+        public byte MaxPlayersPerRoom = 2;
 
 		public PhotonLogLevel Loglevel = PhotonLogLevel.Informational;
 
@@ -135,20 +135,31 @@ namespace Com.DefaultCompany.UnicornVR
 
         public override void OnJoinedRoom()
         {
-            progressLabel.SetActive(false);
+            
             Debug.Log("DemoAnimator/Launcher: OnJoinedRoom() called by PUN. Now this client is in a room.");
             // #Critical: We only load if we are the first player, else we rely on  PhotonNetwork.automaticallySyncScene to sync our instance scene.
-            if (PhotonNetwork.room.PlayerCount == 1)
+            if (true)
             {
                 Debug.Log("We load the" + SCENE_TO_USE);
 
-
-                // #Critical
-                // Load the Room Level. 
-                PhotonNetwork.LoadLevel(SCENE_TO_USE);
             }
         }
 
+        void LateUpdate()
+        {
+
+            if (PhotonNetwork.room != null)
+            {
+                if (PhotonNetwork.room.PlayerCount == 2 && PhotonNetwork.isMasterClient)
+                {
+
+                    Debug.Log("joining");
+
+                    PhotonNetwork.LoadLevel(SCENE_TO_USE);
+                }
+                Debug.Log("Shouldnt join");
+            }
+        }
 
         #endregion
 

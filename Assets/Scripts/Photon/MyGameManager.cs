@@ -15,7 +15,6 @@ namespace Com.DefaultCompany.UnicornVR
         static public string ROOM_SCENCE_NAME = "straightPathsLevel";
         public float minX = -2f, maxX = 2f;
         private Vector3 position;
-        public GameState GameState { get; set; }
 
 
         [Tooltip("The prefab to use for representing the player")]
@@ -37,6 +36,8 @@ namespace Com.DefaultCompany.UnicornVR
                     position = new Vector3(UnityEngine.Random.Range(minX, maxX), 2, 1);
                     // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
                     PhotonNetwork.Instantiate(this.playerPrefab.name, position, Quaternion.identity, 0);
+                    //PlayerManager.LocalPlayerInstance.tag = PhotonNetwork.isMasterClient ? "Playe1" : "Player2";
+
                 }
                 else
                 {
@@ -53,7 +54,10 @@ namespace Com.DefaultCompany.UnicornVR
         /// </summary>
         public override void OnLeftRoom()
         {
-            SceneManager.LoadScene(0);
+            if (PhotonNetwork.room != null && PhotonNetwork.room.PlayerCount == 2 && PhotonNetwork.isMasterClient)
+                SceneManager.LoadScene(ROOM_SCENCE_NAME); // TODO ROOM_SCENCE_NAME?
+            else
+                Invoke("OnLeftRoom", 1);
         }
 
 
@@ -67,7 +71,6 @@ namespace Com.DefaultCompany.UnicornVR
         {
             PhotonNetwork.LeaveRoom();
         }
-
 
         #endregion
 
@@ -99,7 +102,6 @@ namespace Com.DefaultCompany.UnicornVR
             {
                 Debug.Log("OnPhotonPlayerConnected isMasterClient " + PhotonNetwork.isMasterClient); // called before OnPhotonPlayerDisconnected
 
-
                 LoadArena();
             }
         }
@@ -117,11 +119,6 @@ namespace Com.DefaultCompany.UnicornVR
 
                 //LoadArena();
             }
-        }
-
-        public void Slow()
-        {
-
         }
 
         #endregion

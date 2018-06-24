@@ -206,6 +206,10 @@ namespace Com.DefaultCompany.UnicornVR
 
         }
 
+        public Transform GetTransform()
+        {
+            return cameraTransform;
+        }
 
         #endregion
     }

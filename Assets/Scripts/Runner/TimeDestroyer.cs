@@ -13,10 +13,10 @@ public class TimeDestroyer : MonoBehaviour
 
     void DestroyObject()
     {
-        if (GameManager.Instance.GameState != GameState.Dead)
+        //if (CharacterRotateMovement.GameState != GameState.Dead)
             Destroy(gameObject);
     }
 
 
-    public float LifeTime = 20f;
+    public float LifeTime = 15f;
 }

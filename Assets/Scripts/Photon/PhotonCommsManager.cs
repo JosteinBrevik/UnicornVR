@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using Photon;
 
 public class PhotonCommsManager : Photon.PunBehaviour {
-
+    
 	private GameObject currentPlayer;
 
 	void Start () {

@@ -62,7 +62,7 @@ public class CameraLightDetection : MonoBehaviour
         // If change, change game state (speed up, jump, shoot etc)
         if (value > threshold)
         {
-            GameManager.Instance.GameState = GameState.SpeedUp;
+            //GameManager.Instance.GameState = GameState.SpeedUp;
             Debug.Log(value.ToString() + " pixel val");
         }
         //scoreText.text = value.ToString()

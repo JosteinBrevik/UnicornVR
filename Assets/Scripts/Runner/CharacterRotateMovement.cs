@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
+using Com.DefaultCompany.UnicornVR;
 
 public class CharacterRotateMovement : Photon.PunBehaviour
 {
@@ -7,21 +9,20 @@ public class CharacterRotateMovement : Photon.PunBehaviour
 
     private Transform VRCamera;
 
-    private Vector3 moveDirection   = Vector3.zero;
+    private Vector3 moveDirection = Vector3.zero;
     private Vector3 rotateDirection = Vector3.zero;
     private CharacterController controller;
     private Animator anim;
     public float gravity = 40f;
-
+    public PlayerManager playerManager;
     public float JumpSpeed = 8.0f;
     public float SpeedDecrease = 0.5f;
     public float SpeedIncrease = 1.5f;
     public float Speed = 6.0f;
     public Transform CharacterGO;
 
-    bool isInSwipeArea;
-
-    private GameState GameState;// = GameState.Start;
+    public GameState GameState;// = GameState.Start;
+    public PlayerManager MyPlayerManager;
     public SpeedController MySpeedController;
 
     // Use this for initialization
@@ -29,7 +30,9 @@ public class CharacterRotateMovement : Photon.PunBehaviour
     {
         if (photonView.isMine)
         {
-            VRCamera = Camera.main.transform;
+            var newCamera = playerManager.gameObject.GetComponent<CameraWork>().GetTransform();
+            if (newCamera == null) Debug.Log("VRCAMERA = NULL :( ");
+            VRCamera = newCamera;//Camera.main.transform;
             moveDirection = transform.forward;
             moveDirection = transform.TransformDirection(moveDirection);
             moveDirection *= Speed;
@@ -43,8 +46,7 @@ public class CharacterRotateMovement : Photon.PunBehaviour
             controller = GetComponent<CharacterController>();
 
             anim.SetBool(Constants.AnimationStarted, true);
-            var instance = GameManager.Instance;
-            instance.GameState = GameState.Playing;
+            GameState = GameState.Playing;
 
             UIManager.Instance.SetStatus(string.Empty);
 
@@ -62,14 +64,13 @@ public class CharacterRotateMovement : Photon.PunBehaviour
                     if (true)//Input.GetMouseButtonUp(0))
                     {
                         anim.SetBool(Constants.AnimationStarted, true);
-                        var instance = GameManager.Instance;
-                        instance.GameState = GameState.Playing;
+                        GameState = GameState.Playing;
 
                         UIManager.Instance.SetStatus(string.Empty);
                     }
                     break;
                 case GameState.Playing:
-                    VRCamera = Camera.main.transform; //Should we update? == main.camera atm
+                    VRCamera = playerManager.gameObject.GetComponent<CameraWork>().GetTransform();
                     UIManager.Instance.IncreaseScore(0.01f);
                     CheckHeight();
 
@@ -97,20 +98,17 @@ public class CharacterRotateMovement : Photon.PunBehaviour
                     break;
                 case GameState.Slow:
                     MySpeedController.SpeedAlter(SpeedDecrease, 3.0f);
-                    GameManager.Instance.GameState = GameState.Playing;
-                    break;
-
-                case GameState.SpeedUp:
-                    MySpeedController.SpeedAlter(SpeedIncrease, 2f);
-                    GameManager.Instance.GameState = GameState.Playing;
+                    GameState = GameState.Playing;
                     break;
 
                 case GameState.Dead:
                     anim.SetBool(Constants.AnimationStarted, false);
-                    if (Input.GetMouseButtonUp(0))
+                    if (true)//(Input.GetMouseButtonUp(0))
                     {
                         //restart
-                        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                        MySpeedController.SpeedAlter(0.1f, 10f);
+                        MyGameManager.Instance.LeaveRoom();
                     }
                     break;
                 default:
@@ -124,26 +122,28 @@ public class CharacterRotateMovement : Photon.PunBehaviour
     {
         if (transform.position.y < -10 || transform.position.y > 10)
         {
-            GameManager.Instance.Die();
+            //GameManager.Instance.Die();
+            UIManager.Instance.SetStatus(Constants.StatusDeadTapToStart);
+            GameState = GameState.Dead;
         }
     }
 
     private void DetectJumpOrSwipeLeftRight()
     {
-        
+
         var vrRot = VRCamera.rotation.eulerAngles;  //charachter 
         var myRot = transform.rotation.eulerAngles; //hmd
         var angleVert = Mathf.DeltaAngle(vrRot.x, myRot.x);
-        var angleHori= Mathf.DeltaAngle(vrRot.y, myRot.y);
-        rotateDirection.y = angleHori/180f;
-        transform.Rotate(rotateDirection, Time.deltaTime*2);
+        var angleHori = Mathf.DeltaAngle(vrRot.y, myRot.y);
+        rotateDirection.y = angleHori / 180f;
+        transform.Rotate(rotateDirection, Time.deltaTime * 2);
         //Debug.Log(angleHori);
 
         if (angleVert > 20 && controller.isGrounded)
         {
             moveDirection.y = JumpSpeed;
             anim.SetBool(Constants.AnimationJump, true);
-            GameManager.Instance.GameState = GameState.SpeedUp;
+            MySpeedController.SpeedAlter(SpeedIncrease, 2f);
 
         }
         else
@@ -158,13 +158,34 @@ public class CharacterRotateMovement : Photon.PunBehaviour
         UIManager.Instance.SetStatus(Constants.StatusDeadTapToStart);
         this.GameState = GameState.Dead;
     }
-    public void Slow()
+
+
+    void OnTriggerEnter(Collider other)
     {
-        this.GameState = GameState.Slow;
+
+
+        if (!photonView.isMine)
+        {
+            return;
+        }
+
+
+        // We are only interested in Beamers
+        // we should be using tags but for the sake of distribution, let's simply check by name.
+        if (other.name.Contains("modelBox"))
+        {
+            MySpeedController.SpeedAlter(SpeedDecrease, 2f);
+            Destroy(other.gameObject);
+        }
+        else if ((other.name.Contains("candy")))
+        {
+            MySpeedController.SpeedAlter(SpeedIncrease, 1f);
+            Destroy(other.gameObject);
+        }
     }
 
-    public void SpeedUp()
+    public GameState GetGameState()
     {
-        this.GameState = GameState.SpeedUp;
+        return this.GameState;
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class WaitingRoomManager : Photon.PunBehaviour {
-
+    /*
 	public GameObject playerCountText;
 	// Use this for initialization
 	void Start () {
@@ -18,4 +18,5 @@ public class WaitingRoomManager : Photon.PunBehaviour {
 		}
 		 
 	}
+*/
 }

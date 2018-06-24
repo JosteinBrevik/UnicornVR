@@ -653,12 +653,12 @@ GameObject:
   m_Component:
   - component: {fileID: 4716404774815600}
   - component: {fileID: 143013938145957428}
-  - component: {fileID: 114908213874632386}
-  - component: {fileID: 114420599618345294}
   - component: {fileID: 114315927556173868}
+  - component: {fileID: 114930143264716118}
+  - component: {fileID: 114420599618345294}
   - component: {fileID: 114373686867865712}
   - component: {fileID: 114273720315887750}
-  - component: {fileID: 114930143264716118}
+  - component: {fileID: 114908213874632386}
   m_Layer: 0
   m_Name: Character
   m_TagString: Player
@@ -2251,7 +2251,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a8886febdd4121409c5f2b64109a51c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 1
 --- !u!114 &114373686867865712
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2353,11 +2352,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravity: 20
+  playerManager: {fileID: 114315927556173868}
   JumpSpeed: 8
   SpeedDecrease: 0.5
   SpeedIncrease: 1.5
   Speed: 10
   CharacterGO: {fileID: 4370779191659358}
+  MyPlayerManager: {fileID: 114315927556173868}
   MySpeedController: {fileID: 114420599618345294}
 --- !u!114 &114930143264716118
 MonoBehaviour:
@@ -2365,7 +2366,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1567448581160626}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: df7beaf81bf5c8649b4713338f923759, type: 3}
   m_Name: 
